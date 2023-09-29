@@ -7,10 +7,12 @@
       <ion-card-title>{{box.title}}</ion-card-title>
       <ion-card-content>{{box.description}}</ion-card-content>
       <ion-card-content>
-        <ion-img
-          src="{{box.imageURL}}"
-          alt="{{box.imageURL}}"
-        ></ion-img>
+        <ion-thumbnail>
+          <ion-img
+            src="{{box.imageURL}}"
+            alt="{{box.imageURL}}"
+          ></ion-img>
+        </ion-thumbnail>
       </ion-card-content>
     </ion-card>
   </ion-list>
