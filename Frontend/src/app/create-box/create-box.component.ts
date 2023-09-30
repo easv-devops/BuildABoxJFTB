@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -8,22 +8,24 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class CreateBoxComponent  implements OnInit {
 
-  constructor() { }
+  constructor() {
+    price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]]
+  }
 
   ngOnInit() {}
 
   title = new FormControl('', [
     Validators.required,
-    Validators.minLength(5)
+    Validators.minLength(5),
+    Validators.minLength(50)
   ]);
 
   description = new FormControl('', [
-    Validators.required,
-    Validators.minLength(5)
+    Validators.maxLength(500)
   ]);
 
   price = new FormControl('', [
-    Validators.required,
+    Validators.required
   ]);
 
   imageUrl = new FormControl('', [
@@ -56,4 +58,6 @@ export class CreateBoxComponent  implements OnInit {
   createBox() {
     //todo lav det senere
   }
+
+
 }

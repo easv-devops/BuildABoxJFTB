@@ -1,4 +1,8 @@
 <ion-card style=" display: block; flex-direction: column; align-items: center; overflow-y: auto;" >
+  <ion-card-header>
+    <ion-card-title style="text-align: center">Create A Brand New Box</ion-card-title>
+    <ion-card-subtitle style="text-align: center;">We just need some info, before we are ready to create your new box</ion-card-subtitle>
+  </ion-card-header>
   <ion-item>
     <ion-input [formControl]="title" id="title" label="title" labelPlacement="stacked"></ion-input>
   </ion-item>
@@ -12,41 +16,43 @@
     <ion-label *ngIf="description.errors && description.dirty">This is not a good description</ion-label>
   </div>
   <ion-item>
-    <ion-input [formControl]="price" id="price" label="Price" labelPlacement="stacked" type="price"></ion-input>
+    <ion-input [formControl]="price" id="price" label="Price" labelPlacement="stacked"
+               inputmode="numeric"
+               type="number"></ion-input>
   </ion-item>
   <div>
-    <ion-label *ngIf="price.errors && price.dirty">must be a number</ion-label>
+    <ion-label *ngIf="price.errors && price.dirty">must have a price</ion-label>
   </div>
   <ion-item>
-    <ion-input [formControl]="imageUrl" id="imageUrl" label="imageUrl" labelPlacement="stacked"></ion-input>
+    <ion-input [formControl]="imageUrl" id="imageUrl" label="imageUrl" labelPlacement="stacked"
+                type="url"></ion-input>
   </ion-item>
   <div>
     <ion-label *ngIf="imageUrl.errors && imageUrl.dirty">This is not a functional URL</ion-label>
   </div>
   <ion-item>
-    <ion-input [formControl]="width" id="width" label="width" labelPlacement="stacked"></ion-input>
+    <ion-input [formControl]="width" id="width" label="width" labelPlacement="stacked"
+               type="number"></ion-input>
   </ion-item>
   <div>
     <ion-label *ngIf="width.errors && width.dirty">Must be a number</ion-label>
   </div>
-
   <ion-item>
-    <ion-input [formControl]="length" id="length" label="length" labelPlacement="stacked"></ion-input>
+    <ion-input [formControl]="length" id="length" label="length" labelPlacement="stacked"
+               type="number"></ion-input>
   </ion-item>
   <div>
     <ion-label *ngIf="length.errors && length.dirty">Must be a number</ion-label>
   </div>
 
   <ion-item>
-    <ion-input [formControl]="height" id="height" label="height" labelPlacement="stacked"></ion-input>
+    <ion-input [formControl]="height" id="height" label="height" labelPlacement="stacked"
+               type="number"></ion-input>
   </ion-item>
   <div>
     <ion-label *ngIf="height.errors && height.dirty">Must be a number</ion-label>
   </div>
-
-
-
-<ion-card-content style=" display: flex; flex-direction: column; align-items: center;">
+<ion-card-content style=" display: flex; flex-direction: column; align-items: center; margin-bottom: 10%">
   <ion-button  id="createbtn" size="large" color="primary" [disabled]="!formControlGroup.valid.valueOf()" >Create</ion-button>
 </ion-card-content>
 </ion-card>
