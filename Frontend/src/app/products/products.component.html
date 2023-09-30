@@ -1,3 +1,19 @@
 <p>
   viiiirker det bro
 </p>
+<ion-content class="ion-padding">
+  <ion-list class="swiper-scrollbar">
+    <ion-card *ngFor="let box of boxes">
+      <ion-card-title>{{box.title}}</ion-card-title>
+      <ion-card-content>{{box.description}}</ion-card-content>
+      <ion-card-content>
+        <ion-thumbnail>
+          <ion-img
+            src="{{box.imageURL}}"
+            alt="{{box.imageURL}}"
+          ></ion-img>
+        </ion-thumbnail>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
