@@ -17,7 +17,7 @@ export class CreateBoxComponent  implements OnInit {
   title = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
-    Validators.minLength(50)
+    Validators.maxLength(50)
   ]);
 
   description = new FormControl('', [
