@@ -72,3 +72,5 @@ jobs:
 
     - name: Test
       run: (sleep 20 && cd BuildABoxTest && dotnet test &&  kill -9 $(lsof -t -i:5273) & cd Backend && cd Api && cd Api && dotnet run)
+      env:
+        pgconn: ${{secrets.pgtestconn}}
