@@ -63,5 +63,5 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Test
-      run: (cd Backend/Api/Api && dotnet run & sleep 10 && cd ../../BuildABoxTest && dotnet test & sleep 20 && kill -9 $(lsof -t -i:5273))
+      run: (sleep 20 && cd Backend/BuildABoxTest && dotnet test && kill -9 $(lsof -t -i:5273) & cd Backend/Api/Api && dotnet run)
     
