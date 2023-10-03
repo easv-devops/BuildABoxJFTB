@@ -79,4 +79,4 @@ jobs:
       #uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Test
-      run: (sleep 5 && echo kill -9 $(lsof -t -i:5273) & echo dotnet run Api.csproj, cd ../BuildABoxTest, dotnet test)
+      run: (sleep 20 && echo kill -9 $(lsof -t -i:5273) & echo dotnet run Api.csproj, cd ../BuildABoxTest, dotnet test)
