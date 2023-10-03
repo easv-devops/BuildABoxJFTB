@@ -71,6 +71,6 @@ jobs:
       #uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Test
-      run: (sleep 20 && cd BuildABoxTest && dotnet test &&  kill -9 $(lsof -t -i:5273) & cd Backend && cd Api && cd Api && dotnet run)
+      run: (sleep 20 && cd Backend && cd BuildABoxTest && dotnet test &&  kill -9 $(lsof -t -i:5273) & cd Backend && cd Api && cd Api && dotnet run)
       env:
         pgconn: ${{secrets.pgtestconn}}
