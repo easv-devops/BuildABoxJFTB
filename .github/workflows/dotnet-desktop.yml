@@ -56,6 +56,7 @@ jobs:
     environment: pgtestconn
     
     env:
+      pgtestconn: ${{secrets.pgtestconn}}
       Solution_Name: Api.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
       Test_Project_Path: Backend/BuildABoxTest/BuildABoxTest.csproj                # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
       #Wap_Project_Directory: your-wap-project-directory-name    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
@@ -74,8 +75,8 @@ jobs:
         dotnet-version: 8.0.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+    #- name: Setup MSBuild.exe
+      #uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: Execute
-      run: (sleep 5 && echo kill -9 $(lsof -t -i:5273) & echo dotnet run Api.csproj, dotnet test)
+    - name: Test
+      run: (sleep 5 && echo kill -9 $(lsof -t -i:5273) & echo dotnet run Api.csproj, cd ../BuildABoxTest, dotnet test)
