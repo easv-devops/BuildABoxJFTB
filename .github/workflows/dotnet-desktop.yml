@@ -62,12 +62,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Start Api
-      run: cd Backend/Api/Api && dotnet run
-
     - name: Test
-      run: cd Backend/BuildABoxTest && dotnet test
-    
-    - name: Kill Process
-      run: sleep 20 && kill -9 $(lsof -t -i:5273)
+      run: (cd Backend/BuildABoxTest && dotnet test && sleep 20 && kill -9 $(lsof -t -i:5273)) & cd Backend/Api/Api && dotnet run
     
