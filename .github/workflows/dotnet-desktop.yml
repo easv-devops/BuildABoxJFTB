@@ -43,18 +43,10 @@ on:
     branches: [ "master" ]
   workflow_dispatch:
 jobs:
-
   build:
-
-    strategy:
-      matrix:
-        configuration: [Debug, Release]
-
     runs-on: ubuntu-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    
     environment: pgtestconn
-    
     env:
       pgtestconn: ${{secrets.pgtestconn}}
       Solution_Name: Api.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
@@ -79,4 +71,4 @@ jobs:
       #uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Test
-      run: (sleep 20 && cd BuildABoxTest && dotnet test &&  kill -9 $(lsof -t -i:5273) & cd backend && cd Api && dotnet run)
+      run: (sleep 20 && cd BuildABoxTest && dotnet test &&  kill -9 $(lsof -t -i:5273) & cd Backend && cd Api && cd Api && dotnet run)
