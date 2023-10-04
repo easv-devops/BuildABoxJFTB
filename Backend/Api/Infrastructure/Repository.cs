@@ -37,4 +37,18 @@ public class Repository
             return conn.Query<Box>(sql);
         }
     }
+
+    public Box GetBoxById(int id)
+    {
+        var sql = 
+            $@"
+            select * from buildabox.box
+            where productid = @productid;
+            ";
+
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.QueryFirst<Box>(sql, id);
+        }
+    }
 }

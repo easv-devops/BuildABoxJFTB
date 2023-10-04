@@ -22,4 +22,9 @@ public class Service
     {
         return _repository.GetAllProducts();
     }
+
+    public Box GetBoxById(int id)
+    {
+        return _repository.GetBoxById(id);
+    }
 }
