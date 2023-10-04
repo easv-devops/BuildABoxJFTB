@@ -35,4 +35,20 @@ public class BoxController
     {
         return _service.GetBoxById(id);
     }
+    
+    
+        
+    [HttpDelete]
+    [Route("/api/products/{id}")]
+    public bool DeleteArticle([FromHeader] int id)
+    {
+        return _service.DeleteBox(id);
+    }
+    
+    [HttpPut]
+    [Route("/api/products")]
+    public Box UpdateArticle([FromBody] Box box)
+    {
+        return _service.UpdateBox(box);
+    }
 }
