@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
+import {Box} from "../boxcard/boxcard";
+
 
 @Component({
   selector: 'app-products',
@@ -14,6 +16,8 @@ export class ProductsComponent implements OnInit {
     this.http = http;
   }
 
+
+
   ngOnInit() {
     this.getAllProducts();
   }
@@ -23,15 +27,4 @@ export class ProductsComponent implements OnInit {
     const result = await firstValueFrom<Box[]>(call);
     this.boxes = result;
   }
-}
-
-
-export interface Box {
-  productId: number,
-  title: string,
-  description: string,
-  imageURL: string,
-  length: number,
-  width: number,
-  height: number
 }
