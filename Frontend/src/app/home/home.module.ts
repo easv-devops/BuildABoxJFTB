@@ -9,6 +9,7 @@ import {ProductsComponent} from "../products/products.component";
 import {CreateBoxComponent} from "../create-box/create-box.component";
 import {HttpClientModule} from "@angular/common/http";
 import {BoxcardComponent} from "../boxcard/boxcard.component";
+import {DetailsComponent} from "../details/details.component";
 
 
 
@@ -25,6 +26,6 @@ import {BoxcardComponent} from "../boxcard/boxcard.component";
     HomePage,
     ProductsComponent
   ],
-  declarations: [HomePage, ProductsComponent, CreateBoxComponent, BoxcardComponent]
+  declarations: [HomePage, ProductsComponent, CreateBoxComponent, BoxcardComponent, DetailsComponent]
 })
 export class HomePageModule {}

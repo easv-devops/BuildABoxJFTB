@@ -16,14 +16,12 @@ export class ProductsComponent implements OnInit {
     this.http = http;
   }
 
-
-
   ngOnInit() {
     this.getAllProducts();
   }
 
   async getAllProducts() {
-    const call = this.http.get<Box[]>("http://localhost:5273/products");
+    const call = this.http.get<Box[]>("http://localhost:5000/products");
     const result = await firstValueFrom<Box[]>(call);
     this.boxes = result;
   }
