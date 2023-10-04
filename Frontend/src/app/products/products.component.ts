@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit {
   }
 }
 
+
 export interface Box {
   productId: number,
   title: string,
