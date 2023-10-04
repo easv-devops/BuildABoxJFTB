@@ -70,7 +70,7 @@ public class Get_All_Boxes
 
             using (new AssertionScope())
             {
-                response.IsSuccessStatusCode.Should().BeFalse();
+                response.IsSuccessStatusCode.Should().BeTrue();
 
             }
         }
