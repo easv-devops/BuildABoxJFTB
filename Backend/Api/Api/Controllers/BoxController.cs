@@ -28,4 +28,11 @@ public class BoxController
 
         return boxes;
     }
+
+    [HttpGet]
+    [Route("/products/{id}")]
+    public Box GetProductById([FromHeader] int id)
+    {
+        return _service.GetBoxById(id);
+    }
 }
