@@ -65,5 +65,5 @@ jobs:
       with:
         node-version: '18.0.0'
     - name: Test
-      run: (sleep 40 && npm i -g kill-port && npx kill-port 5000) & (sleep 20 && cd Backend/BuildABoxTest && dotnet test) & cd Backend/Api/Api && dotnet run
+      run: (sleep 40 && kill -9 $(lsof -t -i:5000)) & (sleep 20 && cd Backend/BuildABoxTest && dotnet test) & cd Backend/Api/Api && dotnet run
     
