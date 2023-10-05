@@ -37,7 +37,15 @@ export class DetailsComponent {
     this.router.navigate(['createBox/'])
   }
 
-  deleteBox() {
+  async deleteBox() {
 
+    if (confirm("Are you sure you want to delete this?")) {
+      //const map = await firstValueFrom(this.route.paramMap)
+      //const id = map.get('id')
+      const call = this.http.delete("http:localhost:5000/api/products/" + this.box.productId);
+
+      await firstValueFrom(call);
+
+    }
   }
 }

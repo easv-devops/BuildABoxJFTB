@@ -53,13 +53,13 @@ public class Repository
     }
     
     
-    public bool DeleteBox(int id)
+    public bool DeleteBox(int productid)
     {
         var sql = @"DELETE FROM buildabox.box
                     WHERE productid = @productid";
         using (var conn = _dataSource.OpenConnection())
         {
-            var rowsAffected = conn.Execute(sql, new {id}) == 1;
+            var rowsAffected = conn.Execute(sql, new {productid}) == 1;
             return rowsAffected;
         }
     }
