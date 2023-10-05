@@ -22,7 +22,7 @@ export class BoxcardComponent  implements OnInit {
   }
 
   async getAllProducts() {
-    const call = this.http.get<Box[]>("http://localhost:5273/products");
+    const call = this.http.get<Box[]>("http://localhost:5000/products");
     const result = await firstValueFrom<Box[]>(call);
     this.boxes = result;
   }
