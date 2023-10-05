@@ -9,26 +9,25 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
-  route: ActivatedRoute = inject(ActivatedRoute);
+export class DetailsComponent {
+
+  box: Box | any = {}
+
   productId: number | undefined;
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.http = http;
-    this.router = router;
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+ this.getBoxById();
   }
 
-  ngOnInit() {
-    this.productId = parseInt(this.route.snapshot.params['productID'], 10);
-    this.getBoxById();
-  }
+
 
   async getBoxById() {
-    const call = this.http.get<Box>("http://localhost:5000/products/" + this.productId);
+    const map = await firstValueFrom(this.route.paramMap)
+    const id = map.get('id')
+    const call = this.http.get<Box>("http://localhost:5000/products/" + id);
     this.box = await firstValueFrom<Box>(call);
   }
 
-  @Input() box!: Box;
 
   goBack() {
     this.router.navigate(['products/'])
