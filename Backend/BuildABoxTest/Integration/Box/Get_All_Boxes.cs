@@ -1,6 +1,9 @@
+using System.Net.Http.Json;
+using System.Text.Json;
 using Dapper;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace BuildABoxTest.Integration.Box;
 
@@ -73,6 +76,32 @@ public class Get_All_Boxes
                 response.IsSuccessStatusCode.Should().BeTrue();
 
             }
+        }
+    }
+
+    [Test]
+    public async Task GetFeedWithoutProducts()
+    {
+        string url = "http://localhost:5000/products";
+        HttpResponseMessage response;
+        Infrastructure.Model.Box[]? products;
+        try
+        {
+            response = await _httpClient.GetAsync(url);
+            TestContext.WriteLine("The full body response: " 
+                                  + await response.Content.ReadAsStringAsync());
+            
+            products = response.Content.ReadFromJsonAsync<Infrastructure.Model.Box[]>().Result;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(Helper.NoResponseMessage, e);
+        }
+
+        using (new AssertionScope())
+        {
+            products.Should().NotBeNull();
+            products.Should().BeEmpty();
         }
     }
 }
