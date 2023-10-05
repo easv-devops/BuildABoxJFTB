@@ -7,6 +7,7 @@ public class Box
     public int ProductID { get; set; }
     
     [Required]
+    [StringLength(int.MaxValue, MinimumLength = 1)]
     public string Title { get; set; }
     
     [Required]

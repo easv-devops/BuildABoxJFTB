@@ -1,4 +1,5 @@
-﻿using Infrastructure.Model;
+﻿using System.ComponentModel.DataAnnotations;
+using Infrastructure.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -16,6 +17,7 @@ public class BoxController
     [Route("/createBox")]
     public Box CreateBox([FromBody] Box box)
     {
+        Validator.ValidateObject(box, new ValidationContext(box));
         return _service.CreateBox(box.Title, box.Description, box.Price, box.ImageURL, box.Length, box.Width,
             box.Height);
     }
