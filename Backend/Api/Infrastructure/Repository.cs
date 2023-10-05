@@ -37,4 +37,50 @@ public class Repository
             return conn.Query<Box>(sql);
         }
     }
+
+    public Box GetBoxById(int productid)
+    {
+        var sql = 
+            $@"
+            select * from buildabox.box
+            where productid = @productid;
+            ";
+
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.QueryFirst<Box>(sql, new {productid});
+        }
+    }
+    
+    
+    public bool DeleteBox(int id)
+    {
+        var sql = @"DELETE FROM buildabox.box
+                    WHERE productid = @productid";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            var rowsAffected = conn.Execute(sql, new {id}) == 1;
+            return rowsAffected;
+        }
+    }
+    
+    
+    public Box UpdateBox(Box box)
+    {
+        var sql = @"UPDATE buildabox.box
+                    SET title = @Title,
+                        description = @Description,
+                        price = @Price,
+                        imageurl = @ImageURL,
+                        length = @Length,
+                        width = @Width,
+                        height = @Height
+                    WHERE productid = @ProductId
+                    RETURNING *;";   
+        
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.QueryFirst<Box>(sql, box);
+        }
+    }
 }

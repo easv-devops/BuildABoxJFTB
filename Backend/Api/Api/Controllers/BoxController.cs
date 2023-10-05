@@ -30,4 +30,27 @@ public class BoxController
 
         return boxes;
     }
+
+    [HttpGet]
+    [Route("/products/{productID}")]
+    public Box GetProductById([FromRoute] int productID)
+    {
+        return _service.GetBoxById(productID);
+    }
+    
+    
+        
+    [HttpDelete]
+    [Route("/api/products/{id}")]
+    public bool DeleteArticle([FromHeader] int id)
+    {
+        return _service.DeleteBox(id);
+    }
+    
+    [HttpPut]
+    [Route("/api/products")]
+    public Box UpdateArticle([FromBody] Box box)
+    {
+        return _service.UpdateBox(box);
+    }
 }

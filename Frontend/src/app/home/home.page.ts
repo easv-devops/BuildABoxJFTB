@@ -22,5 +22,4 @@ export class HomePage {
    this.menu.close();
   }
 
-
 }
