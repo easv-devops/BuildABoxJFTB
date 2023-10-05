@@ -38,7 +38,7 @@ public class Repository
         }
     }
 
-    public Box GetBoxById(int id)
+    public Box GetBoxById(int productid)
     {
         var sql = 
             $@"
@@ -48,7 +48,7 @@ public class Repository
 
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirst<Box>(sql, id);
+            return conn.QueryFirst<Box>(sql, new {productid});
         }
     }
     

@@ -30,10 +30,10 @@ public class BoxController
     }
 
     [HttpGet]
-    [Route("/products/{id}")]
-    public Box GetProductById([FromHeader] int id)
+    [Route("/products/{productID}")]
+    public Box GetProductById([FromRoute] int productID)
     {
-        return _service.GetBoxById(id);
+        return _service.GetBoxById(productID);
     }
     
     
