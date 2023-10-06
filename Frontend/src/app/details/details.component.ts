@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Box} from "../boxcard/boxcard";
 import {catchError, firstValueFrom, Observable, throwError} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
-
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -47,7 +47,7 @@ export class DetailsComponent {
 
       console.log("you tried to delete id: " + productID);
 
-      this.http.delete("http://localhost:5000/api/products/" + productID).subscribe();
+      this.http.delete(environment.apiBaseUrl + "/api/products/" + productID).subscribe();
 
       this.goBack();
 
