@@ -1,8 +1,10 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Injectable, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Box} from "../boxcard/boxcard";
-import {firstValueFrom} from "rxjs";
+import {catchError, firstValueFrom, Observable, throwError} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
+
+
 
 @Component({
   selector: 'app-details',
@@ -30,22 +32,27 @@ export class DetailsComponent {
 
 
   goBack() {
-    this.router.navigate(['products/'])
+    this.router.navigate(['products/']).then(() => window.location.reload());
   }
 
   goToEdit() {
     this.router.navigate(['createBox/'])
   }
 
-  async deleteBox() {
 
-    if (confirm("Are you sure you want to delete this?")) {
-      //const map = await firstValueFrom(this.route.paramMap)
-      //const id = map.get('id')
-      const call = this.http.delete("http:localhost:5000/api/products/" + this.box.productId);
 
-      await firstValueFrom(call);
+  deleteBox(productID: any) {
+
+    if (confirm("Are you sure you want to delete " + this.box.title)) {
+
+      console.log("you tried to delete id: " + productID);
+
+      this.http.delete("http://localhost:5000/api/products/" + productID).subscribe();
+
+      this.goBack();
 
     }
   }
+
+
 }

@@ -59,8 +59,7 @@ public class Repository
                     WHERE productid = @productid";
         using (var conn = _dataSource.OpenConnection())
         {
-            var rowsAffected = conn.Execute(sql, new {productid}) == 1;
-            return rowsAffected;
+            return conn.Execute(sql, new {productid}) == 1;
         }
     }
     
