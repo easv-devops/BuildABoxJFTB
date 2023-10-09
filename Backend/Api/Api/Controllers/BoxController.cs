@@ -32,6 +32,15 @@ public class BoxController
     }
 
     [HttpGet]
+    [Route("/products/filter")]
+    public IEnumerable<Box> SearchForProducts([FromQuery] string searchQuery)
+    {
+        IEnumerable<Box> boxes = _service.SearchForProducts(searchQuery);
+
+        return boxes;
+    }
+
+    [HttpGet]
     [Route("/products/{productID}")]
     public Box GetProductById([FromRoute] int productID)
     {

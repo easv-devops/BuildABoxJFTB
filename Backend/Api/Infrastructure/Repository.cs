@@ -38,6 +38,21 @@ public class Repository
         }
     }
 
+    public IEnumerable<Box> SearchForProducts(string searchQuery)
+    {
+        try
+        {
+            IEnumerable<Box> products = GetAllProducts();
+            IEnumerable<Box> filteredProducts = products.Where(box => box.Search(searchQuery));
+
+            return filteredProducts;
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Failed to search for products");
+        }
+    }
+
     public Box GetBoxById(int productid)
     {
         var sql = 

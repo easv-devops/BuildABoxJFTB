@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Infrastructure.Interface;
 
 namespace Infrastructure.Model;
 
-public class Box
+public class Box : ISearchable
 {
     public int ProductID { get; set; }
     
@@ -27,4 +28,12 @@ public class Box
     
     [Required]
     public decimal Height { get; set; }
+
+    public bool Search(string searchQuery)
+    {
+        string searchableFields = (ProductID + Title + Description).ToLower();
+        bool searchResult = searchableFields.Contains(searchQuery.ToLower());
+
+        return searchResult;
+    }
 }
