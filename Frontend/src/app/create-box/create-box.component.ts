@@ -1,5 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {firstValueFrom} from "rxjs";
+import {Router} from "@angular/router";
+import {Box} from "../boxcard/boxcard";
 
 @Component({
   selector: 'app-create-box',
@@ -8,7 +13,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class CreateBoxComponent  implements OnInit {
 
-  constructor() {
+  constructor(private http: HttpClient, private router: Router) {
     price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]]
   }
 
@@ -55,8 +60,16 @@ export class CreateBoxComponent  implements OnInit {
   });
 
 
-  createBox() {
-    //todo lav det senere
+  async createBox() {
+    const call = this.http.post<Box>(environment.apiBaseUrl + "/createBox", this.formControlGroup.value)
+    await firstValueFrom(call).then(
+      (response) =>{
+        this.router.navigate(['/details/' + response.productID]);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error)
+      }
+    );
   }
 
 
