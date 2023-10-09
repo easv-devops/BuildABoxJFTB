@@ -4,7 +4,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {firstValueFrom} from "rxjs";
 import {Router} from "@angular/router";
-import {Box} from "../boxcard/boxcard";
+import {Box} from "../models";
 
 @Component({
   selector: 'app-create-box',

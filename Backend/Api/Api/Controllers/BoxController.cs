@@ -42,14 +42,14 @@ public class BoxController
         
     [HttpDelete]
     [Route("/api/products/{productID}")]
-    public bool DeleteArticle([FromRoute] int productID)
+    public bool DeleteBox([FromRoute] int productID)
     {
         return _service.DeleteBox(productID);
     }
     
     [HttpPut]
     [Route("/api/products")]
-    public Box UpdateArticle([FromBody] Box box)
+    public Box UpdateBox([FromBody] Box box)
     {
         return _service.UpdateBox(box);
     }
