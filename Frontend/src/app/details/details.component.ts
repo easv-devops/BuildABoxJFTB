@@ -1,9 +1,10 @@
 import {Component, inject, Injectable, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Box} from "../boxcard/boxcard";
 import {catchError, firstValueFrom, Observable, throwError} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
+import {DataService} from "../data.service";
+import {Box} from "../models";
 
 
 @Component({
@@ -17,8 +18,11 @@ export class DetailsComponent {
 
   productId: number | undefined;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
- this.getBoxById();
+  constructor(private http: HttpClient,
+              private router: Router,
+              private route: ActivatedRoute,
+              public dataService: DataService) {
+    this.getBoxById();
   }
 
 
@@ -28,6 +32,7 @@ export class DetailsComponent {
     const id = map.get('id')
     const call = this.http.get<Box>("http://localhost:5000/products/" + id);
     this.box = await firstValueFrom<Box>(call);
+    this.dataService.currentBox = this.box;
   }
 
 
@@ -36,7 +41,7 @@ export class DetailsComponent {
   }
 
   goToEdit() {
-    this.router.navigate(['createBox/'])
+    this.router.navigate(['edit'])
   }
 
 

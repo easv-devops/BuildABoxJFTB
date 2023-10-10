@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
-import {Box} from "./boxcard";
 import {Router} from "@angular/router";
+import {Box} from "../models";
 
 @Component({
   selector: 'app-boxcard',

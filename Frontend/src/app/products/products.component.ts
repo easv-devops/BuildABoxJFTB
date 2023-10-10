@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
-import {Box} from "../boxcard/boxcard";
+import {Box} from "../models";
 
 
 @Component({
