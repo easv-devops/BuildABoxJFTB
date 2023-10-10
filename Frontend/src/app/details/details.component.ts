@@ -30,7 +30,7 @@ export class DetailsComponent {
   async getBoxById() {
     const map = await firstValueFrom(this.route.paramMap)
     const id = map.get('id')
-    const call = this.http.get<Box>("http://localhost:5000/products/" + id);
+    const call = this.http.get<Box>(environment.apiBaseUrl + "products/" + id);
     this.box = await firstValueFrom<Box>(call);
     this.dataService.currentBox = this.box;
   }
@@ -52,7 +52,7 @@ export class DetailsComponent {
 
       console.log("you tried to delete id: " + productID);
 
-      this.http.delete(environment.apiBaseUrl + "/api/products/" + productID).subscribe();
+      this.http.delete(environment.apiBaseUrl + "products/" + productID).subscribe();
 
       this.goBack();
 

@@ -64,7 +64,7 @@ export class UpdateBoxComponent  implements OnInit {
   });
 
   async updateBox() {
-    const call = this.http.put<Box>(environment.apiBaseUrl + "/api/products", this.formControlGroup.value);
+    const call = this.http.put<Box>(environment.apiBaseUrl + "products", this.formControlGroup.value);
     const result = await firstValueFrom<Box>(call);
     this.dataService.currentBox = result;
 
