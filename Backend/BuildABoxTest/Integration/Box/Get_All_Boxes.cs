@@ -58,7 +58,7 @@ public class Get_All_Boxes
                 conn.Execute(sql, box);
             }
 
-            var url = "http://localhost:5000/products";
+            var url = "http://localhost:5000/api/products";//todo first part should be a global variable, so we can set it to the domain in future
             HttpResponseMessage response;
             try
             {
