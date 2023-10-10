@@ -41,7 +41,7 @@ export class DetailsComponent {
   }
 
   goToEdit() {
-    this.router.navigate(['/api/products'])
+    this.router.navigate(['edit'])
   }
 
 
