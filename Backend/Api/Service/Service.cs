@@ -12,10 +12,9 @@ public class Service
         _repository = repository;
     }
 
-    public Box CreateBox(string title, string description, decimal price, string imageUrl, decimal length,
-        decimal width, decimal height)
+    public Box CreateBox(Box box)
     {
-        return _repository.CreateBox(title, description, price, imageUrl, length, width, height);
+        return _repository.CreateBox(box);
     }
 
     public IEnumerable<Box> GetAllProducts()

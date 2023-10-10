@@ -2,9 +2,10 @@
 using Infrastructure.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers;
 
-public class BoxController
+namespace Api.Controllers;
+[ApiController]
+public class BoxController: ControllerBase
 {
     private readonly Service.Service _service;
 
@@ -13,13 +14,10 @@ public class BoxController
         _service = service;
     }
 
-    [HttpPost]
-    [Route("/createBox")]
+    [HttpPost("/createBox")]
     public Box CreateBox([FromBody] Box box)
     {
-        Validator.ValidateObject(box, new ValidationContext(box));
-        return _service.CreateBox(box.Title, box.Description, box.Price, box.ImageURL, box.Length, box.Width,
-            box.Height);
+        return _service.CreateBox(box);
     }
 
     [HttpGet]
