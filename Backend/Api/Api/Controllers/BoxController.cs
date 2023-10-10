@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 [ApiController]
+[Route("api")]
 public class BoxController: ControllerBase
 {
     private readonly Service.Service _service;
@@ -14,14 +15,14 @@ public class BoxController: ControllerBase
         _service = service;
     }
 
-    [HttpPost("/createBox")]
+    [HttpPost("createBox")]
     public Box CreateBox([FromBody] Box box)
     {
         return _service.CreateBox(box);
     }
 
     [HttpGet]
-    [Route("/products")]
+    [Route("products")]
     public IEnumerable<Box> GetAllProducts()
     {
         IEnumerable<Box> boxes = _service.GetAllProducts();
@@ -30,7 +31,7 @@ public class BoxController: ControllerBase
     }
 
     [HttpGet]
-    [Route("/products/{productID}")]
+    [Route("products/{productID}")]
     public Box GetProductById([FromRoute] int productID)
     {
         return _service.GetBoxById(productID);
@@ -39,14 +40,14 @@ public class BoxController: ControllerBase
     
         
     [HttpDelete]
-    [Route("/api/products/{productID}")]
+    [Route("products/{productID}")]
     public bool DeleteBox([FromRoute] int productID)
     {
         return _service.DeleteBox(productID);
     }
     
     [HttpPut]
-    [Route("/api/products")]
+    [Route("products")]
     public Box UpdateBox([FromBody] Box box)
     {
         return _service.UpdateBox(box);
