@@ -18,21 +18,15 @@ export class BoxcardComponent  implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllProducts();
   }
 
-  async getAllProducts() {
-    const call = this.http.get<Box[]>("http://localhost:5000/products");
-    const result = await firstValueFrom<Box[]>(call);
-    this.boxes = result;
-  }
+
 
   @Input() box!: Box;
 
   goToDetails() {
-      this.router.navigate(['details/'+this.box.productID])
+      this.router.navigate(['/details/'+this.box.productID])
   }
-
 }
 
 

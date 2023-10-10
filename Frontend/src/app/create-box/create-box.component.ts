@@ -61,7 +61,7 @@ export class CreateBoxComponent  implements OnInit {
 
 
   async createBox() {
-    const call = this.http.post<Box>(environment.apiBaseUrl + "/createBox", this.formControlGroup.value)
+    const call = this.http.post<Box>(environment.apiBaseUrl + "createBox", this.formControlGroup.value)
     await firstValueFrom(call).then(
       (response) =>{
         this.router.navigate(['/details/' + response.productID]);
