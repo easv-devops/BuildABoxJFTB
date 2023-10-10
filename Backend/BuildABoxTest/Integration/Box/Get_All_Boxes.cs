@@ -82,7 +82,7 @@ public class Get_All_Boxes
     [Test]
     public async Task GetFeedWithoutProducts()
     {
-        string url = "http://localhost:5000/products";
+        string url = "http://localhost:5000/api/products";//todo first part should be a global variable, so we can set it to the domain in future
         HttpResponseMessage response;
         Infrastructure.Model.Box[]? products;
         try
