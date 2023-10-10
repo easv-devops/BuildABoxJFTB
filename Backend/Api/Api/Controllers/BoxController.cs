@@ -33,9 +33,11 @@ public class BoxController
 
     [HttpGet]
     [Route("/products/filter")]
-    public IEnumerable<Box> SearchForProducts([FromQuery] string searchQuery)
+    public IEnumerable<Box> SearchForProducts([FromQuery] string? searchQuery)
     {
-        IEnumerable<Box> boxes = _service.SearchForProducts(searchQuery);
+        string query = searchQuery ?? "";
+        
+        IEnumerable<Box> boxes = _service.SearchForProducts(query);
 
         return boxes;
     }

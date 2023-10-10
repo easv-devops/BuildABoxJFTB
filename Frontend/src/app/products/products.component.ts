@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
 
   async handleSearch(event: any) {
 
-    const emptyQuery = event.target.value === null ? '' : event.target.value;
+    const emptyQuery = event.target.value;
 
     const options = {
       params : new HttpParams().set('searchQuery', emptyQuery)

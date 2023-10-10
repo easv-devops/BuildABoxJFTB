@@ -5,6 +5,7 @@ namespace Infrastructure.Model;
 
 public class Box : ISearchable
 {
+    
     public int ProductID { get; set; }
     
     [Required]
@@ -27,6 +28,7 @@ public class Box : ISearchable
     public decimal Width { get; set; }
     
     [Required]
+    
     public decimal Height { get; set; }
 
     public bool Search(string searchQuery)
