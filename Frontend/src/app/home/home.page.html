@@ -1,4 +1,4 @@
-<ion-menu id="menu" contentId="main-content" style="text-align: center">
+<ion-menu data-testid="menu-button" id="menu" contentId="main-content" style="text-align: center">
   <ion-header>
     <ion-toolbar>
       <ion-title>
@@ -8,10 +8,10 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-item>
-      <ion-button (click)="goToCreateSite()" size="medium">Create</ion-button>
+      <ion-button (click)="goToCreateSite()" size="medium" data-testid="create-menu-button">Create</ion-button>
     </ion-item>
     <ion-item>
-      <ion-button (click)="goToProductsSite()" size="medium">Products</ion-button>
+      <ion-button (click)="goToProductsSite()" size="medium" data-testid="products-menu-button">Products</ion-button>
     </ion-item>
   </ion-content>
 </ion-menu>
