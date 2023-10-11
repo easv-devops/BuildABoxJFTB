@@ -1,5 +1,9 @@
 
 <ion-content>
+  <ion-searchbar [debounce]="600" (ionInput)="handleSearch($event)">
+
+  </ion-searchbar>
+
   <section class="results">
     <app-boxcard
       *ngFor="let box of boxes" [box]="box">

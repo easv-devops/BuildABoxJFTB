@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
-import {menu} from "ionicons/icons";
 import { MenuController } from "@ionic/angular";
+
+
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,7 @@ import { MenuController } from "@ionic/angular";
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+
 
   constructor(private router: Router, private menu: MenuController) {}
 
@@ -21,5 +23,9 @@ export class HomePage {
     this.router.navigate(['products'])
    this.menu.close();
   }
+
+
+
+
 
 }

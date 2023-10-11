@@ -22,6 +22,11 @@ public class Service
         return _repository.GetAllProducts();
     }
 
+    public IEnumerable<Box> SearchForProducts(string searchQuery)
+    {
+        return _repository.SearchForProducts(searchQuery);
+    }
+
     public Box GetBoxById(int id)
     {
         return _repository.GetBoxById(id);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
 import {Box} from "../models";
 import {environment} from "../../environments/environment";
@@ -26,4 +26,19 @@ export class ProductsComponent implements OnInit {
     const result = await firstValueFrom<Box[]>(call);
     this.boxes = result;
   }
+
+  async handleSearch(event: any) {
+
+    const emptyQuery = event.target.value;
+
+    const options = {
+      params : new HttpParams().set('searchQuery', emptyQuery)
+    }
+
+    const call = this.http.get<Box[]>(environment.apiBaseUrl + "/products/filter", options);
+    const result = await firstValueFrom<Box[]>(call);
+
+    this.boxes = result;
+  }
+
 }
