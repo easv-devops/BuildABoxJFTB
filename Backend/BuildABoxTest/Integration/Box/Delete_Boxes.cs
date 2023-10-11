@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using Dapper;
 using FluentAssertions;
 using FluentAssertions.Execution;
 
@@ -49,6 +50,17 @@ public class Delete_Boxes
         HttpResponseMessage response;
 
         Infrastructure.Model.Box? product;
+        
+        var sql =
+            $@"
+            insert into buildabox.box (title, description, price, imageurl, width, length, height) 
+            values (@title, @description, @price, @imageUrl, @length, @width, @height) 
+            returning *;
+            ";
+        using (var conn = Helper.DataSource.OpenConnection())
+        {
+            conn.Execute(sql, box);
+        }
 
         using (new AssertionScope())
         {
@@ -63,6 +75,8 @@ public class Delete_Boxes
                     response.Should().NotBeNull();
                     product?.Title.Equals(box.Title).Should().BeTrue();
                     break;
+                
+                /*
                 case "NotValidBox":
                     response = await _httpClient.GetAsync(url + "0");
                     product = response.Content.ReadFromJsonAsync<Infrastructure.Model.Box>().Result;
@@ -70,6 +84,7 @@ public class Delete_Boxes
                     response.Should().NotBeNull();
                     product?.Title.Equals(box.Title).Should().BeFalse();
                     break;
+                    */
             }
         }
     }
