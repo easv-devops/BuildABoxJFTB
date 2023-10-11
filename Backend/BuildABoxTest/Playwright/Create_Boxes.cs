@@ -23,7 +23,7 @@ public class Tests : PageTest
         Helper.TriggerRebuild();
 
         //ACT
-        await Page.GotoAsync("http://localhost:4200/home");
+        await Page.GotoAsync("http://localhost:5000/home");
 
         await Page.GetByTestId("menu-button").ClickAsync();
 
@@ -61,10 +61,8 @@ public class Tests : PageTest
 
         await Page.GetByTestId("create-button").ClickAsync();
         
-        await Page.GotoAsync("http://localhost:4200/home");
-        
         //ASSERT
-        await Expect(Page.GetByTestId("card_" + title)).ToBeVisibleAsync();
+        await Expect(Page.GetByTestId(title)).ToBeVisibleAsync();
         await using (var conn = await Helper.DataSource.OpenConnectionAsync())
         {
             var expected = new Box()
