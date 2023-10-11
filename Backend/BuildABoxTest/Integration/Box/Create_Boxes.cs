@@ -60,7 +60,7 @@ public class Create_Boxes
         try
         {
             response = await _httpClient.PostAsJsonAsync(url, box);
-            TestContext.WriteLine("The full body response: " 
+            TestContext.WriteLine("The full body response: "
                                   + await response.Content.ReadAsStringAsync());
         }
         catch (Exception e)
