@@ -97,7 +97,6 @@ public class Get_All_Boxes
         {
             throw new Exception(Helper.NoResponseMessage, e);
         }
-
         using (new AssertionScope())
         {
             products.Should().NotBeNull();
