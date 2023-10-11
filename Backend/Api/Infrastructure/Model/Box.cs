@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Numerics;
+using System.Text.RegularExpressions;
+
 
 namespace Infrastructure.Model;
 
@@ -6,25 +9,22 @@ public class Box
 {
     public int ProductID { get; set; }
     
-    [Required]
-    [StringLength(int.MaxValue, MinimumLength = 1)]
+    [Required(ErrorMessage = "Title is required")]
+    [StringLength(int.MaxValue, MinimumLength = 3, ErrorMessage = "Title to short")]
     public string Title { get; set; }
-    
-    [Required]
     public string Description { get; set; }
-    
-    [Required]
+    [Required(ErrorMessage = "Price is required")]
     public decimal Price { get; set; }
-    
-    [Required]
+    [Required(ErrorMessage = "Image is required")]
     public string ImageURL { get; set; }
     
-    [Required]
-    public decimal Length { get; set; }
-    
-    [Required]
-    public decimal Width { get; set; }
-    
-    [Required]
+    [Range(0, double.MaxValue, ErrorMessage = "Value must be non-negative")]
+    [Required(ErrorMessage = "Length is required")]
+    public double Length { get; set; }
+    [Required(ErrorMessage = "width is required")]
+    [Range(0, double.MaxValue, ErrorMessage = "Value must be non-negative")]
+    public double Width { get; set; }
+    [Required(ErrorMessage = "Width is required")]
+    [Range(0, double.MaxValue, ErrorMessage = "Value must be non-negative")]
     public decimal Height { get; set; }
 }
