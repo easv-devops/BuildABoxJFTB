@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
-import {Box} from "../boxcard/boxcard";
+import {Box} from "../models";
 import {environment} from "../../environments/environment";
 
 
@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   }
 
   async getAllProducts() {
-    const call = this.http.get<Box[]>("http://localhost:5000/products");
+    const call = this.http.get<Box[]>(environment.apiBaseUrl +"products");
     const result = await firstValueFrom<Box[]>(call);
     this.boxes = result;
   }

@@ -54,7 +54,7 @@ public class Create_Boxes
             Height = height
         };
 
-        string url = "http://localhost:5000/createBox";
+        string url = "http://localhost:5000/api/createBox";//todo first part should be a global variable, so we can set it to the domain in future
         HttpResponseMessage response;
         Infrastructure.Model.Box? responseBox;
         try

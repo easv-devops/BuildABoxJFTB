@@ -23,3 +23,18 @@
     grid-template-columns: 1fr;
   }
 }
+
+ion-item {
+  --border-width: 0;
+  --inner-border-width: 0;
+}
+
+ion-item-divider {
+  visibility: hidden;
+}
+
+.inline {
+  overflow: hidden;
+  white-space: nowrap;
+}
+

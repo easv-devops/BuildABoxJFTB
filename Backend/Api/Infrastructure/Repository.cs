@@ -13,8 +13,7 @@ public class Repository
         _dataSource = dataSource;
     }
 
-    public Box CreateBox(string title, string description, decimal price, string imageUrl,
-        decimal length, decimal width, decimal height)
+    public Box CreateBox(Box box)
     {
         var sql =
             $@"
@@ -25,7 +24,7 @@ public class Repository
 
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirst<Box>(sql, new { title, description, price, imageUrl, width, length, height });
+            return conn.QueryFirst<Box>(sql, new { box.Title, box.Description, box.Price, box.ImageURL, box.Width, box.Length, box.Height});
         }
     }
 

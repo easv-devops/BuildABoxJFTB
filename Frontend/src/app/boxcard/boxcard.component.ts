@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
-import {Box} from "./boxcard";
 import {Router} from "@angular/router";
+import {Box} from "../models";
 
 @Component({
   selector: 'app-boxcard',
@@ -18,21 +18,15 @@ export class BoxcardComponent  implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllProducts();
   }
 
-  async getAllProducts() {
-    const call = this.http.get<Box[]>("http://localhost:5000/products");
-    const result = await firstValueFrom<Box[]>(call);
-    this.boxes = result;
-  }
+
 
   @Input() box!: Box;
 
   goToDetails() {
-      this.router.navigate(['details/'+this.box.productID])
+      this.router.navigate(['/details/'+this.box.productID])
   }
-
 }
 
 

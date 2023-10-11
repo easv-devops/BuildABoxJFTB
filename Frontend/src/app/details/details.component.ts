@@ -1,9 +1,10 @@
 import {Component, inject, Injectable, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Box} from "../boxcard/boxcard";
 import {catchError, firstValueFrom, Observable, throwError} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
+import {DataService} from "../data.service";
+import {Box} from "../models";
 
 
 @Component({
@@ -17,8 +18,11 @@ export class DetailsComponent {
 
   productId: number | undefined;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
- this.getBoxById();
+  constructor(private http: HttpClient,
+              private router: Router,
+              private route: ActivatedRoute,
+              public dataService: DataService) {
+    this.getBoxById();
   }
 
 
@@ -26,8 +30,9 @@ export class DetailsComponent {
   async getBoxById() {
     const map = await firstValueFrom(this.route.paramMap)
     const id = map.get('id')
-    const call = this.http.get<Box>("http://localhost:5000/products/" + id);
+    const call = this.http.get<Box>(environment.apiBaseUrl + "products/" + id);
     this.box = await firstValueFrom<Box>(call);
+    this.dataService.currentBox = this.box;
   }
 
 
@@ -36,7 +41,7 @@ export class DetailsComponent {
   }
 
   goToEdit() {
-    this.router.navigate(['createBox/'])
+    this.router.navigate(['edit'])
   }
 
 
@@ -47,7 +52,7 @@ export class DetailsComponent {
 
       console.log("you tried to delete id: " + productID);
 
-      this.http.delete(environment.apiBaseUrl + "/api/products/" + productID).subscribe();
+      this.http.delete(environment.apiBaseUrl + "products/" + productID).subscribe();
 
       this.goBack();
 
