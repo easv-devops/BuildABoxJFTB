@@ -17,7 +17,7 @@
   </ion-fab>
 
   <ion-card class="ion-margin-top ion-padding-top">
-    <ion-card-title class="ion-padding">{{box.title}}</ion-card-title>
+    <ion-card-title [attr.data-testid]="box.title" class="ion-padding">{{box.title}}</ion-card-title>
     <ion-card-subtitle class="ion-padding-start">ID: {{box.productID}}</ion-card-subtitle>
     <ion-card-content>
       <ion-item>
