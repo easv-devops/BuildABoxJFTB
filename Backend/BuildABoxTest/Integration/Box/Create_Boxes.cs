@@ -82,7 +82,7 @@ public class Create_Boxes
                     break;
                 /*case "EmptyTitle":
                     break;
-                case "TextPrice":
+                case "MinusPrice":
                     break;
                 case "BooleanLength":
                     break;
