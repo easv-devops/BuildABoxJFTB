@@ -46,10 +46,9 @@ public class Delete_Boxes
         };
 
         var
-            url = "http://localhost:5000/api/delete/"; //todo first part should be a global variable, so we can set it to the domain in future
+            url = "http://localhost:5000/api/products/"; //todo first part should be a global variable, so we can set it to the domain in future
         HttpResponseMessage response;
-
-        Infrastructure.Model.Box? product;
+        
         
         var sql =
             $@"
@@ -70,10 +69,7 @@ public class Delete_Boxes
             {
                 case "ValidBox":
                     response = await _httpClient.GetAsync(url + TestContext.CurrentContext.Test.ID);
-                    product = response.Content.ReadFromJsonAsync<Infrastructure.Model.Box>().Result;
-                    response.IsSuccessStatusCode.Should().BeTrue();
-                    response.Should().NotBeNull();
-                    product?.Title.Equals(box.Title).Should().BeTrue();
+                    response.Content.
                     break;
                 
                 /*
