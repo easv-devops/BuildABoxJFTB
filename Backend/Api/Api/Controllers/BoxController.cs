@@ -2,7 +2,6 @@
 using Infrastructure.Model;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace Api.Controllers;
 [ApiController]
 [Route("api")]
@@ -26,6 +25,17 @@ public class BoxController: ControllerBase
     public IEnumerable<Box> GetAllProducts()
     {
         IEnumerable<Box> boxes = _service.GetAllProducts();
+
+        return boxes;
+    }
+
+    [HttpGet]
+    [Route("/products/filter")]
+    public IEnumerable<Box> SearchForProducts([FromQuery] string? searchQuery)
+    {
+        string query = searchQuery ?? "";
+        
+        IEnumerable<Box> boxes = _service.SearchForProducts(query);
 
         return boxes;
     }
