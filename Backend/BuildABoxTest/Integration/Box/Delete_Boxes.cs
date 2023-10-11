@@ -48,7 +48,8 @@ public class Delete_Boxes
         var
             url = "http://localhost:5000/api/products/"; //todo first part should be a global variable, so we can set it to the domain in future
         HttpResponseMessage response;
-        
+        Results? result;
+        int id;
         
         var sql =
             $@"
@@ -58,7 +59,7 @@ public class Delete_Boxes
             ";
         using (var conn = Helper.DataSource.OpenConnection())
         {
-            conn.Execute(sql, box);
+            id = conn.Execute(sql, box);
         }
 
         using (new AssertionScope())
@@ -68,20 +69,25 @@ public class Delete_Boxes
             switch (testName)
             {
                 case "ValidBox":
-                    response = await _httpClient.GetAsync(url + TestContext.CurrentContext.Test.ID);
-                    response.Content.
+                    response = await _httpClient.DeleteAsync(url + id);
+                    result = response.Content.ReadFromJsonAsync<Results>().Result;
+                    response.IsSuccessStatusCode.Should().BeTrue();
+                    result.Should().NotBeNull();
+                    result?.Result.Should().BeTrue();
                     break;
-                
-                /*
                 case "NotValidBox":
-                    response = await _httpClient.GetAsync(url + "0");
-                    product = response.Content.ReadFromJsonAsync<Infrastructure.Model.Box>().Result;
+                    response = await _httpClient.DeleteAsync(url + "9999");//not a real id
+                    result = response.Content.ReadFromJsonAsync<Results>().Result;
                     response.IsSuccessStatusCode.Should().BeTrue();
                     response.Should().NotBeNull();
-                    product?.Title.Equals(box.Title).Should().BeFalse();
+                    result?.Result.Should().BeFalse();
                     break;
-                    */
             }
         }
     }
+}
+
+public class Results
+{
+    public bool Result { get; set; }
 }

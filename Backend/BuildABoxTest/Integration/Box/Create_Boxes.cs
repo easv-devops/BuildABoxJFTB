@@ -80,16 +80,21 @@ public class Create_Boxes
                     responseBox.Should().NotBeNull();
                     responseBox?.Title.Equals(box.Title).Should().BeTrue();
                     break;
-                /*case "EmptyTitle":
+                case "EmptyTitle":
+                    response.IsSuccessStatusCode.Should().BeFalse();
                     break;
                 case "MinusPrice":
+                    response.IsSuccessStatusCode.Should().BeFalse();
                     break;
                 case "BooleanLength":
+                    response.IsSuccessStatusCode.Should().BeFalse();
                     break;
                 case "IntArrayWidth":
+                    response.IsSuccessStatusCode.Should().BeFalse();
                     break;
                 case "NullHeight":
-                    break;*/
+                    response.IsSuccessStatusCode.Should().BeFalse();
+                    break;
                 default:
                     response.IsSuccessStatusCode.Should().BeFalse();
                     break;
