@@ -30,7 +30,7 @@ public class BoxController: ControllerBase
     }
 
     [HttpGet]
-    [Route("/products/filter")]
+    [Route("products/filter")]
     public IEnumerable<Box> SearchForProducts([FromQuery] string? searchQuery)
     {
         string query = searchQuery ?? "";
@@ -57,8 +57,8 @@ public class BoxController: ControllerBase
     }
     
     [HttpPut]
-    [Route("products")]
-    public Box UpdateBox([FromBody] Box box)
+    [Route("/api/products")]
+    public Box UpdateArticle([FromBody] Box box)
     {
         return _service.UpdateBox(box);
     }

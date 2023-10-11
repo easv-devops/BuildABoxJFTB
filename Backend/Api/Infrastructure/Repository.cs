@@ -18,7 +18,7 @@ public class Repository
         var sql =
             $@"
             insert into buildabox.box (title, description, price, imageurl, width, length, height) 
-            values (@title, @description, @price, @imageUrl, @length, @width, @height) 
+            values (@title, @description, @price, @imageUrl, @width, @length, @height) 
             returning *;
             ";
 

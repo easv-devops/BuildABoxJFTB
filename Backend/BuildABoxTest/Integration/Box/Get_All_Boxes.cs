@@ -50,7 +50,7 @@ public class Get_All_Boxes
             var sql =
                 $@"
             insert into buildabox.box (title, description, price, imageurl, width, length, height) 
-            values (@title, @description, @price, @imageUrl, @length, @width, @height) 
+            values (@title, @description, @price, @imageUrl, @width, @length, @height) 
             returning *;
             ";
             using (var conn = Helper.DataSource.OpenConnection())
