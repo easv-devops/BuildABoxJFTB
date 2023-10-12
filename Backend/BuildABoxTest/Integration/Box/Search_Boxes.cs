@@ -239,7 +239,7 @@ public class Search_Boxes
             boxesFromSearch.Should().NotBeNull();
             response.IsSuccessStatusCode.Should().BeTrue();
 
-            Box? expectedBox = boxes.FirstOrDefault(box => box.Title == searchQuery);
+            Box? expectedBox = boxes.FirstOrDefault(box => box.Title.Equals(searchQuery));
 
             expectedBox.Should().NotBeNull();
             
@@ -348,7 +348,7 @@ public class Search_Boxes
             boxesFromSearch.Should().NotBeNull();
             response.IsSuccessStatusCode.Should().BeTrue();
 
-            Box? expectedBox = boxes.FirstOrDefault(box => box.Description == searchQuery);
+            Box? expectedBox = boxes.FirstOrDefault(box => box.Description.Equals(searchQuery));
 
             expectedBox.Should().NotBeNull();
             
