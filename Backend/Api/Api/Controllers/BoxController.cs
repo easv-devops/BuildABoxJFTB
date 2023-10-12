@@ -30,7 +30,7 @@ public class BoxController: ControllerBase
     }
 
     [HttpGet]
-    [Route("/products/filter")]
+    [Route("products/filter")]
     public IEnumerable<Box> SearchForProducts([FromQuery] string? searchQuery)
     {
         string query = searchQuery ?? "";

@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
       params : new HttpParams().set('searchQuery', emptyQuery)
     }
 
-    const call = this.http.get<Box[]>(environment.apiBaseUrl + "/products/filter", options);
+    const call = this.http.get<Box[]>(environment.apiBaseUrl + "products/filter", options);
     const result = await firstValueFrom<Box[]>(call);
 
     this.boxes = result;
