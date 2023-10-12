@@ -125,25 +125,19 @@ public class Update_Boxes
         }
     }
     
-    /**
-    [TestCase("", 40, 13, 15, 20, TestName = "EmptyTitle")]
-    [TestCase("Four", 40, 13, 15, 20, TestName = "TooShortTitle")]
-    [TestCase("Mock Title", -10, 13, 15, 20, TestName = "NegativePrice")]
-    [TestCase("Mock Title", 40, -10, 15, 20, TestName = "NegativeLength")]
-    [TestCase("Mock Title", 40, 13,  -10, 20, TestName = "NegativeWidth")]
-    [TestCase("Mock Title", 40, 13, 15, -10, TestName = "NegativeHeight")]
-    public async Task EditBoxWithInvalidInput(string title, decimal price, double length, double width, double height)
+    [Test]
+    public async Task EditBoxWithInvalidLength()
     {
         Infrastructure.Model.Box box = new Infrastructure.Model.Box()
         {
             ProductID = 1,
-            Title = title,
+            Title = "Created title",
             Description = "Description",
-            Price = price,
+            Price = 14,
             ImageURL = "https://www.celladorales.com/wp-content/uploads/2016/12/ShippingBox_sq.jpg",
-            Length = length,
-            Width = width,
-            Height = height
+            Length = 4,
+            Width = 4,
+            Height = 2
         };
 
         string urlCreate = "http://localhost:5000/api/createBox";//todo first part should be a global variable, so we can set it to the domain in future
@@ -152,7 +146,6 @@ public class Update_Boxes
         string urlUpdate = "http://localhost:5000/api/products";
         HttpResponseMessage responseUpdate;
         
-        Infrastructure.Model.Box? responseBoxCreated;
         Infrastructure.Model.Box? responseBoxUpdated;
         try
         {
@@ -160,7 +153,7 @@ public class Update_Boxes
             TestContext.WriteLine("The full body response: " 
                                   + await responseCreate.Content.ReadAsStringAsync());
             
-            box.Title = "Edited title";
+            box.Length = -10; //Length must be a positive number
 
             responseUpdate = await _httpClient.PutAsJsonAsync(urlUpdate, box);
             TestContext.WriteLine("The full body response: " 
@@ -173,13 +166,109 @@ public class Update_Boxes
 
         using (new AssertionScope())
         {
-            responseBoxCreated = responseCreate.Content.ReadFromJsonAsync<Infrastructure.Model.Box>().Result;
             responseBoxUpdated = responseUpdate.Content.ReadFromJsonAsync<Infrastructure.Model.Box>().Result;
-            responseUpdate.IsSuccessStatusCode.Should().BeTrue();
+            responseUpdate.IsSuccessStatusCode.Should().BeFalse();
+            responseUpdate.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             responseBoxUpdated.Should().NotBeNull();
-            responseBoxUpdated?.Title.Equals(box.Title).Should().BeTrue();
-            responseBoxUpdated.Title.Equals(responseBoxCreated?.Title).Should().BeFalse();
+            responseBoxUpdated?.Length.Equals(box.Length).Should().BeFalse();
         }
     }
-    */
+    
+    [Test]
+    public async Task EditBoxWithInvalidWidth()
+    {
+        Infrastructure.Model.Box box = new Infrastructure.Model.Box()
+        {
+            ProductID = 1,
+            Title = "Created title",
+            Description = "Description",
+            Price = 14,
+            ImageURL = "https://www.celladorales.com/wp-content/uploads/2016/12/ShippingBox_sq.jpg",
+            Length = 4,
+            Width = 4,
+            Height = 2
+        };
+
+        string urlCreate = "http://localhost:5000/api/createBox";//todo first part should be a global variable, so we can set it to the domain in future
+        HttpResponseMessage responseCreate;
+        
+        string urlUpdate = "http://localhost:5000/api/products";
+        HttpResponseMessage responseUpdate;
+        
+        Infrastructure.Model.Box? responseBoxUpdated;
+        try
+        {
+            responseCreate = await _httpClient.PostAsJsonAsync(urlCreate, box);
+            TestContext.WriteLine("The full body response: " 
+                                  + await responseCreate.Content.ReadAsStringAsync());
+            
+            box.Width = -10; //Width must be a positive number
+
+            responseUpdate = await _httpClient.PutAsJsonAsync(urlUpdate, box);
+            TestContext.WriteLine("The full body response: " 
+                                  + await responseUpdate.Content.ReadAsStringAsync());
+        }
+        catch (Exception e)
+        {
+            throw new Exception(Helper.NoResponseMessage, e);
+        }
+
+        using (new AssertionScope())
+        {
+            responseBoxUpdated = responseUpdate.Content.ReadFromJsonAsync<Infrastructure.Model.Box>().Result;
+            responseUpdate.IsSuccessStatusCode.Should().BeFalse();
+            responseUpdate.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            responseBoxUpdated.Should().NotBeNull();
+            responseBoxUpdated?.Width.Equals(box.Width).Should().BeFalse();
+        }
+    }
+    
+    [Test]
+    public async Task EditBoxWithInvalidHeight()
+    {
+        Infrastructure.Model.Box box = new Infrastructure.Model.Box()
+        {
+            ProductID = 1,
+            Title = "Created title",
+            Description = "Description",
+            Price = 14,
+            ImageURL = "https://www.celladorales.com/wp-content/uploads/2016/12/ShippingBox_sq.jpg",
+            Length = 4,
+            Width = 4,
+            Height = 2
+        };
+
+        string urlCreate = "http://localhost:5000/api/createBox";//todo first part should be a global variable, so we can set it to the domain in future
+        HttpResponseMessage responseCreate;
+        
+        string urlUpdate = "http://localhost:5000/api/products";
+        HttpResponseMessage responseUpdate;
+        
+        Infrastructure.Model.Box? responseBoxUpdated;
+        try
+        {
+            responseCreate = await _httpClient.PostAsJsonAsync(urlCreate, box);
+            TestContext.WriteLine("The full body response: " 
+                                  + await responseCreate.Content.ReadAsStringAsync());
+            
+            box.Height = -10; //Height must be a positive number
+
+            responseUpdate = await _httpClient.PutAsJsonAsync(urlUpdate, box);
+            TestContext.WriteLine("The full body response: " 
+                                  + await responseUpdate.Content.ReadAsStringAsync());
+        }
+        catch (Exception e)
+        {
+            throw new Exception(Helper.NoResponseMessage, e);
+        }
+
+        using (new AssertionScope())
+        {
+            responseBoxUpdated = responseUpdate.Content.ReadFromJsonAsync<Infrastructure.Model.Box>().Result;
+            responseUpdate.IsSuccessStatusCode.Should().BeFalse();
+            responseUpdate.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            responseBoxUpdated.Should().NotBeNull();
+            responseBoxUpdated?.Height.Equals(box.Height).Should().BeFalse();
+        }
+    }
 }
