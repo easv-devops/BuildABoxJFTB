@@ -72,8 +72,8 @@ public class Tests : PageTest
                 Description = description, 
                 Price = price, 
                 ImageURL = imageUrl, 
-                Length = width, 
-                Width = length, 
+                Length = length, 
+                Width = width, 
                 Height = height
             }; //Box object from test case
 
