@@ -5,7 +5,7 @@
   </ion-searchbar>
 
   <section class="results">
-    <app-boxcard
+    <app-boxcard [attr.data-testid]="'card_'+box.title"
       *ngFor="let box of boxes" [box]="box">
     </app-boxcard>
   </section>

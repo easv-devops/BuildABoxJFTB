@@ -27,7 +27,7 @@ public class Box : ISearchable
     public double Width { get; set; }
     [Required(ErrorMessage = "Width is required")]
     [Range(0, double.MaxValue, ErrorMessage = "Value must be non-negative")]
-    public decimal Height { get; set; }
+    public double Height { get; set; }
 
     public bool Search(string searchQuery)
     {
@@ -37,3 +37,4 @@ public class Box : ISearchable
         return searchResult;
     }
 }
+

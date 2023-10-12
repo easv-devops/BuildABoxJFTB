@@ -51,9 +51,11 @@ public class BoxController: ControllerBase
         
     [HttpDelete]
     [Route("products/{productID}")]
-    public bool DeleteBox([FromRoute] int productID)
+    public Object DeleteBox([FromRoute] int productID)
     {
-        return _service.DeleteBox(productID);
+        
+        bool result = _service.DeleteBox(productID);
+        return new {result = result};
     }
     
     [HttpPut]
