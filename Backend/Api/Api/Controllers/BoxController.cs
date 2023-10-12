@@ -59,8 +59,8 @@ public class BoxController: ControllerBase
     }
     
     [HttpPut]
-    [Route("/api/products")]
-    public Box UpdateArticle([FromBody] Box box)
+    [Route("products")]
+    public Box UpdateBox([FromBody] Box box)
     {
         return _service.UpdateBox(box);
     }
